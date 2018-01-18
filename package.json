@@ -1,0 +1,22 @@
+{
+  "name": "antlrtools",
+  "version": "1.0.0",
+  "description": "Antlr4 for R",
+  "main": "index.js",
+  "scripts": {
+    "develop": "webpack-dev-server --hot --inline --progress",
+    "build": "NODE_ENV=production webpack --json > stats.json"
+  },
+  "author": "Naresh Jois <naresh@noesyssofware.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "html-webpack-plugin": "^2.30.1",
+    "uglifyjs-webpack-plugin": "^1.1.6",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.0"
+  },
+  "dependencies": {
+    "antlr4": "^4.7.1",
+    "lodash": "^4.17.4"
+  }
+}
