@@ -13,7 +13,7 @@ This uses the Visitor Pattern to Generate a JSON Respresentation of Tree.
 ### Output
 
     {
-        "error": null,
+        "errors": null, // In [{ line: number, column: number, message: string }]
         "tree": [
             {
                 "func": {

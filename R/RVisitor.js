@@ -68,6 +68,9 @@ RVisitor.prototype.visitSublist = function(ctx) {
 
 // Visit a parse tree produced by RParser#sub.
 RVisitor.prototype.visitSub = function(ctx) {
+  if (ctx.children == null || ctx.children.length == 0) {
+    return null;
+  }
   if (ctx.children[0].children.length > 1) {
     let children = this.visitChildren(ctx)[0];
     // See if the Child Has already been parser as an expression if so 
