@@ -4,7 +4,8 @@ This is a simple and fairly ugly version of expression parser for the we build u
 This uses the Visitor Pattern to Generate a JSON Respresentation of Tree.
 
 ## Parsers Completed
-[X] R
+
+- [X] R
 
 ### Input
 
@@ -64,5 +65,5 @@ This uses the Visitor Pattern to Generate a JSON Respresentation of Tree.
 
 ## TODO
 
-[X] Javascript
-[X] Excel
+- [ ] Javascript
+- [ ] Excel
