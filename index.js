@@ -15,15 +15,14 @@ let getRParsedTree = function (input) {
     parser.addErrorListener(errorListener);
     var tree = parser.prog();
     var visitor = new RVisitor.RVisitor();
-    if (errorListener.errors.length > 0) {
-        return {
-            errors: errorListener.errors,
-            tree: null,
-        };
-    }
-    var result = visitor.visitProg(tree);
+    var result;
+    try {
+        result = visitor.visitProg(tree);
+    } catch (e) {
+        errorListener.errors.push({ line: 1, column: 1, message: "Unable to Parse Expression" });
+    };
     return {
-        errors: null,
+        errors: errorListener.errors,
         tree: result
     }
 }
