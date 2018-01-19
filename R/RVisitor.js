@@ -81,7 +81,7 @@ RVisitor.prototype.visitSub = function(ctx) {
       return { name: null, value: children }
     }
     // Logically we should end up only with 2 values with a equate operator
-    return { name: children[0], value: children[1].value, position: children[1].position };
+    return { name: children[0], value: children[1].value, position: children[0].position };
   }
   let children = this.visitChildren(ctx);
   var value = { name: "", value: children[0].value, position: children[0].position };
