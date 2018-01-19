@@ -12,6 +12,7 @@ let getRParsedTree = function (input) {
     var errorListener = new RErrorListner.RErrorListner();
     parser.buildParseTrees = true;
     var parseError = null;
+    parser.removeErrorListeners();
     parser.addErrorListener(errorListener);
     var tree = parser.prog();
     var visitor = new RVisitor.RVisitor();
