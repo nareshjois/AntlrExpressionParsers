@@ -68,6 +68,15 @@ RVisitor.prototype.visitSublist = function(ctx) {
 
 // Visit a parse tree produced by RParser#sub.
 RVisitor.prototype.visitSub = function(ctx) {
+  let concatChildern = function(childs) {
+    let s = "";
+    childs.forEach(c => {
+       s += c.value + "$";
+    });
+    s = s.substr(0, s.length -1);
+    return s;
+  }
+
   if (ctx.children == null || ctx.children.length == 0) {
     return null;
   }
@@ -80,13 +89,28 @@ RVisitor.prototype.visitSub = function(ctx) {
       }
       return { name: null, value: children }
     }
-    // Logically we should end up only with 2 values with a equate operator
-    return { name: children[0], value: children[1].value, position: children[0].position };
+    // Logically we should end up only with 2 values
+    // but we have to check which operators are present based on
+    // which the return value is calulated
+    // if there is only "=" then its an assignment
+    // if there is only "$" then its an accessor
+    // if there are both then its and assignement with the value of accessor
+
+    if (ctx.getText().indexOf("=") > 0 && ctx.getText().indexOf("$") > 0) {
+      // Here the value should be a concated version of children[1];
+      return { name: children[0], value: concatChildern(children[1]), position: children[0].position };
+    } else if (ctx.getText().indexOf("=") > 0) {
+      return { name: children[0], value: children[1].value, position: children[0].position };
+    } else {
+      return { name: "", value: concatChildern(children), position: children[0].position };
+    }
   }
   let children = this.visitChildren(ctx);
   var value = { name: "", value: children[0].value, position: children[0].position };
   return value;
 };
+
+
 
 
 
