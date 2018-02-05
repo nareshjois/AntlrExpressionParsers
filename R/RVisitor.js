@@ -69,6 +69,9 @@ RVisitor.prototype.visitSublist = function(ctx) {
 // Visit a parse tree produced by RParser#sub.
 RVisitor.prototype.visitSub = function(ctx) {
   let concatChildern = function(childs) {
+    if (!isArray(childs)){
+      return childs.value;
+    }
     let s = "";
     childs.forEach(c => {
        s += c.value + "$";
@@ -85,7 +88,13 @@ RVisitor.prototype.visitSub = function(ctx) {
     // See if the Child Has already been parser as an expression if so 
     if (children.params != null) {
       if (isArray(children.func)) {
-        return { name: children.func.shift(), value: { func: children.func[0], params: children.params  }  }
+
+        let ixOfFirstEq = ctx.getText().indexOf("=");
+        if (ixOfFirstEq === -1) {
+          ixOfFirstEq = 0;
+        }
+        let text = ctx.getText().substring(ixOfFirstEq + 1, ctx.getText().length);
+        return { name: children.func.shift(), text: text, value: { func: children.func[0], params: children.params  }  }
       }
       return { name: null, value: children }
     }
